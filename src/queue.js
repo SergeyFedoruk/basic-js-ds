@@ -13,54 +13,37 @@ const { NotImplementedError } = require('../extensions/index.js');
  * queue.dequeue(); // returns the top element from queue and deletes it, returns 1
  * queue.getUnderlyingList() // returns { value: 3, next: null }
  */
-let front = null, rear = null;
+
 class Queue {
-    constructor(value) {
-        this.value = value;
-        this.next = null;
+    constructor() {
+        this.elements = {};
+        this.head = 0;
+        this.tail = 0;
     }
 
     getUnderlyingList() {
         //throw new NotImplementedError('Not implemented');
         // remove line with error and write your code here
-        let current = this.head; // saves a link to the head of the queue
+        return(this.elements[this.head]);
 
-        while (current) { // goes through each Node of the Queue
-            console.log(current.value); // prints the value of the Node in console
-            current = current.next;
-        }
-        ;
-    }
-        enqueue( value )        {
-            let temp = new QNode(value);
-
-            // If queue is empty, then new node is front and rear both
-            if (rear == null) {
-                front = rear = temp;
-                return;
-            }
-
-            // Add the new node at the end of queue and change rear
-            rear.next = temp;
-            rear = temp;
-
-        }
-
-        dequeue()
-        {
-            if (front == null)
-                return;
-
-            // Store previous front and move front one node ahead
-            let temp = front;
-            front = front.next;
-
-            // If front becomes NULL, then change rear also as NULL
-            if (front == null)
-                rear = null;
-        }
     }
 
+    enqueue(element) {
+        this.elements[this.tail] = element;
+        this.tail++;
+
+    }
+
+    dequeue() {
+        const item = this.elements[this.head];
+        delete this.elements[this.head];
+        this.head++;
+        return item;
+
+
+        }
+
+}
 
 module.exports = {
   Queue
